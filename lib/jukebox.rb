@@ -15,6 +15,8 @@ songs = [
 
 
 def help
+  #list of valid commands in run
+  
   puts "I accept the following commands:"
   puts "- help : displays this help message"
   puts "- list : displays a list of songs you can play"
@@ -23,17 +25,20 @@ def help
 end
 
 def list(songs)
-  #binding.pry
+  #puts list of songs with number (index+1)
+
   songs.each_with_index do |song,index|
     puts (index+1).to_s + ". #{songs[index]}"
   end
 end
 
 def play(songs)
+  #gets response from user. Response is either number of song (as string) or name of song. Test if answer is valid number (between 0 and 9). Then search for song in songs first by index then by name.
+  
   puts "Please enter a song name or number:"
   answer = gets.strip
   
-  if answer == "0" or answer.to_i+1>9
+  if answer == "0" or answer.to_i+1>9 or answer.to_i < 0 
     puts "Invalid input, please try again"
   elsif answer.to_i == 0
     if songs.find {|i| i==answer}
@@ -51,7 +56,11 @@ def exit_jukebox
   puts "Goodbye"
 end
 
+
+
 def run (songs)
+  #prompt user and calles methods based upon response. Exit loop via "exit". invalid commands do not exit loop
+  
   puts "Please enter a command:"
   input = gets.strip
   
@@ -74,4 +83,3 @@ def run (songs)
   exit_jukebox
 end
 
-#run(songs) 
